@@ -7,6 +7,8 @@ import { DatabaseModule } from './database.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ProduitsModule } from './produits/produits.module';
+import { LocalFilesModule } from './local-file/local-file.module';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { ProduitsModule } from './produits/produits.module';
     UsersModule,
     AuthModule,
     ProduitsModule,
+    LocalFilesModule,
+    SharedModule,
   ],
   controllers: [AppController,],
   providers: [AppService],

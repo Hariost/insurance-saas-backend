@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
-import { UserEntity } from './entity/user.entity'
+import { UserEntity } from './entities/user.entity'
 import { UserDto } from './dto/user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { toUserDto } from '../shared/mapper'
@@ -60,7 +60,7 @@ export class UsersService {
             throw new HttpException('Identifiants incorrects.', HttpStatus.UNAUTHORIZED);    
         }
         
-        return user;  
+        return toUserDto(user);  
     }
 
     async findByPayload({ userId }: any): Promise<UserEntity> {
@@ -71,7 +71,6 @@ export class UsersService {
     async create(userDto: CreateUserDto): Promise<UserDto> {    
         const { lastName, firstName, phoneNumber, email, password, } = userDto;
         
-        // check if the user exists in the db    
         const userInDb = await this.usersRepository.findOne({ 
             where: { email } 
         });
@@ -90,38 +89,12 @@ export class UsersService {
             ...user,
             avatar: null
           });
-          // await this.filesService.deletePublicFile(user.avatar.id);
         }
-        /*const avatar = await this.filesService.uploadPublicFile(imageBuffer, filename);
-        await this.usersRepository.update(userId, {
-          ...user,
-          avatar
-        });*/
         return user;
     }
     
     async deleteAvatar(userId: string) {
-        /*
-    const queryRunner = this.connection.createQueryRunner();
-    const user = await this.getById(userId);
-    const fileId = user.avatar?.id;
-    if (fileId) {
-        await queryRunner.connect();
-        await queryRunner.startTransaction();
-        try {
-        await queryRunner.manager.update(User, userId, {
-            ...user,
-            avatar: null
-        });
-        await this.filesService.deletePublicFileWithQueryRunner(fileId, queryRunner);
-        await queryRunner.commitTransaction();
-        } catch (error) {
-        await queryRunner.rollbackTransaction();
-        throw new InternalServerErrorException();
-        } finally {
-        await queryRunner.release();
-        }
-    }*/
+
     }
     
     async setCurrentRefreshToken(refreshToken: string, userId: string) {

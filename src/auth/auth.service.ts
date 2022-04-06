@@ -12,6 +12,7 @@ import { UsersService } from '../users/users.service'
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
+import { toUserDto } from '../shared/mapper';
 
 @Injectable()
 export class AuthService {
@@ -77,7 +78,7 @@ export class AuthService {
         if (!user) {
             throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);    
         }    
-        return user;  
+        return toUserDto(user) ;  
     }
 
     public getCookieWithJwtToken(id: string) {

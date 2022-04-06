@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsEnum,IsOptional } from 'class-validator';
+import { AuthMethod } from '../enum/auth-method.enum';
 
 export class CreateUserDto {  
     @IsNotEmpty()  
@@ -7,14 +8,18 @@ export class CreateUserDto {
     @IsNotEmpty()  
     firstName: string;
 
+    @IsOptional()
     phoneNumber: string;
 
-    @IsNotEmpty()  
+    @IsOptional()  
     @IsEmail()  
     email: string;
     
     @IsNotEmpty()  
     password: string;
 
+    @IsNotEmpty()
+    @IsEnum(AuthMethod)
+    authMethod: AuthMethod;
    
 }

@@ -24,11 +24,11 @@ export class ProduitsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProduitDto: UpdateProduitDto) {
-    return this.produitsService.update(+id, updateProduitDto);
+    return this.produitsService.update(id, updateProduitDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.produitsService.remove(+id);
+    return this.produitsService.remove(id);
   }
 }

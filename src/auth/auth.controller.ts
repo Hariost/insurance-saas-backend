@@ -29,12 +29,6 @@ export class AuthController {
         }
         return result;  
     }
-    /*
-    @Post('login')  
-    public async login(@Body() loginUserDto: LoginUserDto): Promise<LoginStatus> {
-        return await this.authService.localSignin(loginUserDto);  
-    }
-    */
 
     @HttpCode(200)
     @Post('singin')

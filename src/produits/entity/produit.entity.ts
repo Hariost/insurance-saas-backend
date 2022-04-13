@@ -11,60 +11,57 @@ export class Produit {
         nullable: false, 
         unique: true 
     }) 
-    codeproduit: string;
+    productCode: string;
 
     @Column({ 
         type: 'varchar', 
         nullable: false, 
     }) 
-    libelle: string;
+    label: string;
     
     @Column({ nullable: true })
-    primeMin: number;
+    minPremium: number;
 
     @Column({ nullable: true })
-    primeMax: number;
+    maxPremium: number;
 
     @Column({ nullable: true })
-    ageMin: number;
+    minSubscriptionAge: number;
 
     @Column({ nullable: true })
-    ageMax: number;
+    maxSubscriptionAge: number;
 
     @Column({ nullable: true })
-    ageSortie: number;
+    exitAge: number;
     
     @ManyToOne(() => Branche, branche => branche.id)
     @JoinColumn({name: 'brancheId'})
-    branche: Branche;
+    branch: Branche;
     
-    @Column({ default: false })
-    rachatPartielAutorise: boolean;
+    @Column({ default: true })
+    withdrawalAllowed: boolean;
 
     @Column({ default: 0 })
-    tempsAvantRachat: number;
+    nbMonthBeforeWithdrawal: number;
 
-    @Column({ default: 50 })
-    pourcentageRachat: number;
-
-    @Column({ default: 0 })
-    coutPolice: number;
+    @Column({ default: 80 })
+    maxWithdrawalPercentage: number;
 
     @Column({ default: 0 })
-    dureeRente: number;
+    policyFees: number;
+
+    @Column({ default: 0 })
+    nbAnnuity: number;
 
     @Column()
-    formatNumProposition: string;
+    policyNumberPattern: string;
 
     @Column()
-    prefixeNumProposition: string;
+    isMarketed: boolean;
 
     @Column()
-    estCommercialise: boolean;
+    policyDefautStatus: string;
 
     @Column()
-    codeStatutContrat: string;
-
-    @Column()
-    canalDistribution: string;
+    distributionChannel: string;
 }

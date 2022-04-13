@@ -1,56 +1,71 @@
 import { IsNotEmpty, IsNumber, IsBoolean } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { Branche } from '../entity/branches.entity';
 
 export class CreateProduitDto {
     @IsNotEmpty()
-    codeproduit: string;
+    @ApiProperty()
+    productCode: string;
 
     @IsNotEmpty()
-    libelle: string;
+    @ApiProperty()
+    label: string;
     
     @IsNotEmpty()
     @IsNumber()
-    primeMin: number;
+    @ApiProperty()
+    minPremium: number;
 
     @IsNotEmpty()
-    primeMax: number;
+    @ApiProperty()
+    maxPremium: number;
 
     @IsNotEmpty()
-    ageMin: number;
+    @ApiProperty()
+    minSubscriptionAge: number;
 
     @IsNotEmpty()
-    ageMax: number;
-
-    ageSortie: number;
+    @ApiProperty()
+    maxSubscriptionAge: number;
+    
+    @ApiProperty()
+    exitAge: number;
 
     @IsNotEmpty()
-    brancheId: number;
+    @ApiProperty()
+    branch: Branche;
 
     @IsBoolean()
-    rachatPartielAutorise?: boolean;
+    @ApiProperty()
+    withdrawalAllowed?: boolean;
 
     @IsNumber()
-    tempsAvantRachat?: number;
+    @ApiProperty()
+    nbMonthBeforeWithdrawal?: number;
 
     @IsNumber()
-    pourcentageRachat?: number;
+    @ApiProperty()
+    maxWithdrawalPercentage?: number;
 
     @IsNumber()
-    coutPolice?: number;
+    @ApiProperty()
+    policyFees?: number;
     
     @IsNumber()
-    dureeRente?: number;
+    @ApiProperty()
+    nbAnnuity?: number;
 
     @IsNotEmpty()
-    formatNumProposition?: string;
-
-    @IsNotEmpty()
-    prefixeNumProposition: string;
+    @ApiProperty()
+    policyNumberPattern?: string;
 
     @IsBoolean()
-    estCommercialise: boolean;
+    isMarketed?: boolean;
 
     @IsNotEmpty()
-    codeStatutContrat: string;
+    @ApiProperty()
+    policyDefautStatus: string;
 
-    canalDistribution?: string;
+    @ApiProperty()
+    distributionChannel?: string;
 }
